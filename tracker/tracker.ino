@@ -13,8 +13,7 @@
 #define DATA		2
 #define RESET		4
 #define CLOCK_INT	3
-int switcher = 1;
-int f_x, f_y, s_x, s_y;
+
 
 TrackPoint trackpoint(CLOCK, DATA, RESET, true);
 
@@ -23,7 +22,7 @@ void setup()
   Serial.begin(115200);
 	trackpoint.reset();
 	trackpoint.setSensitivityFactor(0xC0);
-	trackpoint.setStreamMode();
+  trackpoint.setStreamMode();
 	attachInterrupt(CLOCK_INT, clockInterrupt, FALLING);
 }
 
@@ -36,8 +35,6 @@ void clockInterrupt(void) {
   trackpoint.getDataBit();
   if(trackpoint.reportAvailable()) {
     TrackPoint::DataReport d = trackpoint.getStreamReport();
-    f_x = d.x;
-    f_y = d.y;
-    Serial.print(f_x); Serial.print("  ");Serial.println(f_y);
-  } 
+    Serial.print(d.x); Serial.print("  ");Serial.println(d.y);
+  }
 }
