@@ -24,7 +24,6 @@ void setup()
 	trackpoint.reset();
 	trackpoint.setSensitivityFactor(0xC0);
 	trackpoint.setStreamMode();
-  Serial.println("Update Done");
 	attachInterrupt(CLOCK_INT, clockInterrupt, FALLING);
 }
 
@@ -36,20 +35,9 @@ void loop()
 void clockInterrupt(void) {
   trackpoint.getDataBit();
   if(trackpoint.reportAvailable()) {
-    if(switcher == 1) {
     TrackPoint::DataReport d = trackpoint.getStreamReport();
     f_x = d.x;
     f_y = d.y;
-   
-    }
-    if(switcher==-1)
-    {
-      TrackPoint::DataReport d = trackpoint.getStreamReport();
-      s_x = d.x;
-      s_y = d.y;
-     
-    }
-    switcher = switcher * -1;
-       Serial.print(switcher); Serial.print("  ");Serial.print(f_x); Serial.print("  ");Serial.print(f_y); Serial.print("  ");Serial.print(s_x); Serial.print("  "); Serial.println(s_y); 
+    Serial.print(f_x); Serial.print("  ");Serial.println(f_y);
   } 
 }
