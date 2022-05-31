@@ -1,11 +1,16 @@
+from data_manager import DataManager
 from reader import FingerForceSensorReader
 from plotter import DataVisualiser
 import numpy as np
 import cv2
 
-sensor = FingerForceSensorReader("COM3")
+#sensor = FingerForceSensorReader("COM3")
 #plotter = DataVisualiser()
+data_manager = DataManager("tracker")
+data_manager.save()
 
+
+exit()
 total_x = 450
 total_y = 450
 

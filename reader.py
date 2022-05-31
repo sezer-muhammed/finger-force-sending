@@ -31,6 +31,7 @@ class FingerForceSensorReader():
         self.sensor_outputs.append([0, 0, time.time() - self.start_time])
 
   def get_all_data(self):
+
     self.data_number = len(self.sensor_outputs) - 2
     return np.array(self.sensor_outputs)
 
