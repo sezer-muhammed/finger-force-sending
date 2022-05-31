@@ -1,3 +1,4 @@
+from matplotlib.pyplot import plot
 from data_manager import DataManager
 from reader import FingerForceSensorReader
 from plotter import DataVisualiser
@@ -5,7 +6,7 @@ import numpy as np
 import cv2
 
 #sensor = FingerForceSensorReader("COM3")
-#plotter = DataVisualiser()
+plotter = DataVisualiser()
 data_manager = DataManager("empy", "empty.npy")
 data_manager.load()
 data_manager.set_time()
@@ -22,6 +23,7 @@ while True:
   total_x += int(-output[0])
   total_y += int(output[1])
   background = canvas.copy()
+  plotter.render(output)
   cv2.circle(background, (total_x, total_y), 10, (0,0,255), -1, cv2.LINE_AA)
   cv2.imshow("frame", background)
   cv2.waitKey(1)
