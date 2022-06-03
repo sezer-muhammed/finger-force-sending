@@ -1,4 +1,3 @@
-from matplotlib.pyplot import plot
 from data_manager import DataManager
 from reader import FingerForceSensorReader
 from plotter import DataVisualiser
@@ -7,7 +6,7 @@ import cv2
 
 #sensor = FingerForceSensorReader("COM3")
 plotter = DataVisualiser()
-data_manager = DataManager("empy", "empty.npy")
+data_manager = DataManager("data_save", "data_save.npy")
 data_manager.load()
 data_manager.set_time()
 
@@ -17,9 +16,12 @@ total_y = 450
 
 canvas = np.ones((900,900,3), np.uint8) * 255
 
+output = []
 while True:
+  last_output = output
   output = data_manager.return_real_time()
-  print(output)
+  if output == last_output:
+    continue
   total_x += int(-output[0])
   total_y += int(output[1])
   background = canvas.copy()
