@@ -5,6 +5,8 @@ class DataVisualiser():
   def __init__(self, seconds = 10) -> None: #COM3
     self.seconds = seconds
     self.fig, self.ax = plt.subplots()
+    self.fig.set_figwidth(20)
+    self.fig.set_figheight(12)
     self.ax.set_ylim([-100, 100])
     x = np.linspace(-self.seconds, 0, 100)
     (self.ln,) = self.ax.plot(x, x, animated=True)

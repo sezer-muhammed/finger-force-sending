@@ -25,3 +25,16 @@ class DataManager():
       return temp_array[-1]
     except:
       return np.array([[0, 0, 0]])
+
+  def return_all_real_time(self):
+    self.last_index = 0
+    index_time = time.time() - self.start_time
+    try:
+      temp_array = self.data[self.data[:, 2] < index_time]
+      if temp_array.size > 0:
+        return temp_array
+      else:
+        pass
+    except:
+      pass
+    return np.array([[0, 0, 0]])
