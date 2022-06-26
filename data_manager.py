@@ -38,3 +38,6 @@ class DataManager():
     except:
       pass
     return np.array([[0, 0, 0]])
+
+  def export_csv(self, output_path):
+    np.savetxt(output_path, self.data, delimiter=",")

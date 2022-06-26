@@ -6,9 +6,9 @@ save_path = ""
 load_path = "trackpoint_5_haziran.npy"
 
 manager = DataManager(save_path, load_path)
-plotter = DataVisualiser()
 
 manager.load()
+manager.export_csv("raw_data")
 manager.set_time()
 
 output = np.array([[0, 0, 0]])
@@ -30,8 +30,11 @@ while True:
 
   #output[-1] = np.max(output[-5:])
   if output.shape[0] > 10:
-    deneme = np.expand_dims(absmaxND(output[-10:], axis = 0), axis = 0)
+    deneme = np.expand_dims(absmaxND(output[-6:], axis = 0), axis = 0)
     filtered_output = np.concatenate((filtered_output, deneme), axis = 0)
 
-  plotter.render(output)
+  if filtered_output.shape[0] == 10230:
+    np.savetxt("filtered_data", filtered_output, delimiter = ",")
+    print("done")
+    exit()
 
